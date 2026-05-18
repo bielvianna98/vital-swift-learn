@@ -9,8 +9,38 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as VrRouteImport } from './routes/vr'
+import { Route as TeoricaRouteImport } from './routes/teorica'
+import { Route as SobreRouteImport } from './routes/sobre'
+import { Route as QuizRouteImport } from './routes/quiz'
+import { Route as PraticaRouteImport } from './routes/pratica'
 import { Route as IndexRouteImport } from './routes/index'
 
+const VrRoute = VrRouteImport.update({
+  id: '/vr',
+  path: '/vr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TeoricaRoute = TeoricaRouteImport.update({
+  id: '/teorica',
+  path: '/teorica',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SobreRoute = SobreRouteImport.update({
+  id: '/sobre',
+  path: '/sobre',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuizRoute = QuizRouteImport.update({
+  id: '/quiz',
+  path: '/quiz',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PraticaRoute = PraticaRouteImport.update({
+  id: '/pratica',
+  path: '/pratica',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +49,83 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/pratica': typeof PraticaRoute
+  '/quiz': typeof QuizRoute
+  '/sobre': typeof SobreRoute
+  '/teorica': typeof TeoricaRoute
+  '/vr': typeof VrRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/pratica': typeof PraticaRoute
+  '/quiz': typeof QuizRoute
+  '/sobre': typeof SobreRoute
+  '/teorica': typeof TeoricaRoute
+  '/vr': typeof VrRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/pratica': typeof PraticaRoute
+  '/quiz': typeof QuizRoute
+  '/sobre': typeof SobreRoute
+  '/teorica': typeof TeoricaRoute
+  '/vr': typeof VrRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
+  id: '__root__' | '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PraticaRoute: typeof PraticaRoute
+  QuizRoute: typeof QuizRoute
+  SobreRoute: typeof SobreRoute
+  TeoricaRoute: typeof TeoricaRoute
+  VrRoute: typeof VrRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/vr': {
+      id: '/vr'
+      path: '/vr'
+      fullPath: '/vr'
+      preLoaderRoute: typeof VrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/teorica': {
+      id: '/teorica'
+      path: '/teorica'
+      fullPath: '/teorica'
+      preLoaderRoute: typeof TeoricaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sobre': {
+      id: '/sobre'
+      path: '/sobre'
+      fullPath: '/sobre'
+      preLoaderRoute: typeof SobreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quiz': {
+      id: '/quiz'
+      path: '/quiz'
+      fullPath: '/quiz'
+      preLoaderRoute: typeof QuizRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pratica': {
+      id: '/pratica'
+      path: '/pratica'
+      fullPath: '/pratica'
+      preLoaderRoute: typeof PraticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +138,11 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PraticaRoute: PraticaRoute,
+  QuizRoute: QuizRoute,
+  SobreRoute: SobreRoute,
+  TeoricaRoute: TeoricaRoute,
+  VrRoute: VrRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
