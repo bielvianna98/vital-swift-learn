@@ -44,14 +44,6 @@ const modules = [
 function Home() {
   return (
     <AppShell>
-      <section className="mb-6">
-        <div className="rounded-2xl bg-medical-gradient p-5 text-white shadow-glow relative overflow-hidden">
-          <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/10" />
-          <div className="absolute -right-2 bottom-0 w-16 h-16 rounded-full bg-white/10" />
-          <h2 className="text-xl font-bold">Manobra de desengasgo em bebê</h2>
-          <p className="text-sm opacity-90 mt-1">4 módulos · ~15 min para revisar tudo</p>
-        </div>
-      </section>
 
       <div className="flex flex-col gap-3">
         {modules.map(({ to, title, desc, Icon }) => (
