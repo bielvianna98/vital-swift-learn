@@ -6,7 +6,7 @@ import { Check, X, Trophy, RotateCcw } from "lucide-react";
 export const Route = createFileRoute("/quiz")({
   head: () => ({
     meta: [
-      { title: "Quiz — Pulso" },
+      { title: "Quiz — MedStep" },
       { name: "description", content: "Teste seus conhecimentos sobre desengasgo em bebê." },
     ],
   }),

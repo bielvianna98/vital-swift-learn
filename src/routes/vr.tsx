@@ -5,7 +5,7 @@ import { Glasses, Sparkles, Cpu, Wifi, Play } from "lucide-react";
 export const Route = createFileRoute("/vr")({
   head: () => ({
     meta: [
-      { title: "Realidade Virtual — Pulso" },
+      { title: "Realidade Virtual — MedStep" },
       { name: "description", content: "Treine a manobra em simulação imersiva 3D." },
     ],
   }),

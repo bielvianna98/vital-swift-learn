@@ -5,7 +5,7 @@ import { Play, PhoneCall, Hand, RotateCcw, HeartPulse, AlertCircle } from "lucid
 export const Route = createFileRoute("/pratica")({
   head: () => ({
     meta: [
-      { title: "Aula Prática — Pulso" },
+      { title: "Aula Prática — MedStep" },
       { name: "description", content: "Passo a passo da manobra de desengasgo em bebê." },
     ],
   }),

@@ -5,7 +5,7 @@ import { AlertTriangle, Baby, BookOpen, ShieldCheck, Stethoscope, Activity } fro
 export const Route = createFileRoute("/teorica")({
   head: () => ({
     meta: [
-      { title: "Aula Teórica — Pulso" },
+      { title: "Aula Teórica — MedStep" },
       { name: "description", content: "Fundamentos da manobra de desengasgo em bebê." },
     ],
   }),

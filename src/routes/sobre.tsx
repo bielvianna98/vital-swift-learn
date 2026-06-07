@@ -5,8 +5,8 @@ import { Zap, ShieldCheck, Eye, GraduationCap, Smartphone, HeartPulse } from "lu
 export const Route = createFileRoute("/sobre")({
   head: () => ({
     meta: [
-      { title: "Sobre — Pulso" },
-      { name: "description", content: "Diferenciais da startup Pulso: educação médica acessível e rápida." },
+      { title: "Sobre — MedStep" },
+      { name: "description", content: "Diferenciais da startup MedStep: educação médica acessível e rápida." },
     ],
   }),
   component: Sobre,
@@ -23,10 +23,10 @@ const diffs = [
 
 function Sobre() {
   return (
-    <AppShell title="Sobre o Pulso" showBack>
+    <AppShell title="Sobre o MedStep" showBack>
       <div className="rounded-3xl bg-medical-gradient text-white p-6 shadow-glow mb-6">
         <p className="text-xs uppercase tracking-widest opacity-80">Startup</p>
-        <h2 className="text-3xl font-extrabold mt-1">Pulso</h2>
+        <h2 className="text-3xl font-extrabold mt-1">MedStep</h2>
         <p className="opacity-90 mt-2">
           Medicina em segundos. Suporte técnico de bolso para quem cuida de vidas.
         </p>

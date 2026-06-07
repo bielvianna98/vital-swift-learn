@@ -5,9 +5,9 @@ import { AppShell } from "@/components/AppShell";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Pulso — Medicina em segundos" },
+      { title: "MedStep — Medicina em segundos" },
       { name: "description", content: "Revisão rápida de procedimentos médicos: teoria, prática, quiz e simulação VR." },
-      { property: "og:title", content: "Pulso — Medicina em segundos" },
+      { property: "og:title", content: "MedStep — Medicina em segundos" },
       { property: "og:description", content: "App educacional para estudantes de Medicina." },
     ],
   }),
@@ -48,8 +48,7 @@ function Home() {
         <div className="rounded-2xl bg-medical-gradient p-5 text-white shadow-glow relative overflow-hidden">
           <div className="absolute -right-6 -top-6 w-24 h-24 rounded-full bg-white/10" />
           <div className="absolute -right-2 bottom-0 w-16 h-16 rounded-full bg-white/10" />
-          <p className="text-xs uppercase tracking-widest opacity-80">Procedimento ativo</p>
-          <h2 className="text-xl font-bold mt-1">Manobra de desengasgo em bebê</h2>
+          <h2 className="text-xl font-bold">Manobra de desengasgo em bebê</h2>
           <p className="text-sm opacity-90 mt-1">4 módulos · ~15 min para revisar tudo</p>
         </div>
       </section>
@@ -90,7 +89,7 @@ function Home() {
         to="/sobre"
         className="block mt-6 text-center text-sm text-medical font-medium hover:underline"
       >
-        Conheça os diferenciais do Pulso →
+        Conheça os diferenciais do MedStep →
       </Link>
     </AppShell>
   );
