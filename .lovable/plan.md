@@ -1,15 +1,18 @@
-## Plano
+## Problema
+Na tela inicial (`/`) ainda existe um banner fixo no topo com o texto:
 
-### 1. Remover "Procedimento ativo" da tela inicial
-- Arquivo: `src/routes/index.tsx`
-- Remover o texto "Procedimento ativo" do card de destaque da home, mantendo o restante do card (nome do procedimento, módulos, etc.).
+- "Manobra de desengasgo em bebê"
+- "4 módulos · ~15 min para revisar tudo"
 
-### 2. Renomear o app de "Pulso" para "MedStep"
-Atualizar todas as ocorrências do nome em:
-- `src/routes/index.tsx` — título da página, meta tags e CTA
-- `src/routes/__root.tsx` — título e meta tags globais
-- `src/components/AppShell.tsx` — nome no menu lateral, rodapé e link "Sobre"
-- `src/routes/sobre.tsx` — título, meta descrição e texto exibido
-- `src/routes/teorica.tsx`, `pratica.tsx`, `quiz.tsx`, `vr.tsx` — sufixo do título da aba
+O usuário informou que esse conteúdo não deve aparecer desde o início. A home deve ser neutra, sem um procedimento pré-selecionado.
 
-Nenhuma alteração de estrutura, lógica ou backend será feita.
+## Solução
+Remover o banner de procedimento ativo da tela inicial em `src/routes/index.tsx` (linhas 47-54). Ajustar o espaçamento da seção seguinte (os 4 cards de módulos) para que o layout continue equilibrado sem o banner.
+
+## Escopo
+- Apenas `src/routes/index.tsx`
+- Sem alterações em outras rotas ou componentes
+- Sem alterações de estrutura ou lógica de navegação
+
+## Resultado esperado
+Tela inicial limpa, mostrando diretamente os 4 cards de módulos (Aula teórica, Aula prática, Quiz, Realidade Virtual) sem o banner de procedimento pré-selecionado.
