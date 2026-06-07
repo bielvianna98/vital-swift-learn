@@ -72,10 +72,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Pulso — Medicina em segundos" },
+      { title: "MedStep — Medicina em segundos" },
       { name: "description", content: "App educacional de revisão rápida de procedimentos médicos." },
-      { name: "author", content: "Pulso" },
-      { property: "og:title", content: "Pulso — Medicina em segundos" },
+      { name: "author", content: "MedStep" },
+      { property: "og:title", content: "MedStep — Medicina em segundos" },
       { property: "og:description", content: "Lovable Generated Project" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

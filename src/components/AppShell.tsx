@@ -18,7 +18,7 @@ export function AppShell({ children, title, showBack }: AppShellProps) {
     { to: "/pratica", label: "Aula Prática" },
     { to: "/quiz", label: "Quiz" },
     { to: "/vr", label: "Realidade Virtual" },
-    { to: "/sobre", label: "Sobre o Pulso" },
+    { to: "/sobre", label: "Sobre o MedStep" },
   ] as const;
 
   return (
@@ -80,7 +80,7 @@ export function AppShell({ children, title, showBack }: AppShellProps) {
                   <Stethoscope className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <p className="font-bold text-primary leading-none">Pulso</p>
+                  <p className="font-bold text-primary leading-none">MedStep</p>
                   <p className="text-xs text-muted-foreground">Medicina em segundos</p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export function AppShell({ children, title, showBack }: AppShellProps) {
               ))}
             </div>
             <p className="mt-auto text-xs text-muted-foreground pt-6 border-t border-border">
-              Pulso · v1.0 — Educação médica acessível.
+              MedStep · v1.0 — Educação médica acessível.
             </p>
           </nav>
         </div>
