@@ -15,6 +15,8 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as PraticaRouteImport } from './routes/pratica'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeoricaSlugRouteImport } from './routes/teorica.$slug'
+import { Route as PraticaSlugRouteImport } from './routes/pratica.$slug'
 
 const VrRoute = VrRouteImport.update({
   id: '/vr',
@@ -46,46 +48,87 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeoricaSlugRoute = TeoricaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => TeoricaRoute,
+} as any)
+const PraticaSlugRoute = PraticaSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PraticaRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/pratica': typeof PraticaRoute
+  '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
-  '/teorica': typeof TeoricaRoute
+  '/teorica': typeof TeoricaRouteWithChildren
   '/vr': typeof VrRoute
+  '/pratica/$slug': typeof PraticaSlugRoute
+  '/teorica/$slug': typeof TeoricaSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/pratica': typeof PraticaRoute
+  '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
-  '/teorica': typeof TeoricaRoute
+  '/teorica': typeof TeoricaRouteWithChildren
   '/vr': typeof VrRoute
+  '/pratica/$slug': typeof PraticaSlugRoute
+  '/teorica/$slug': typeof TeoricaSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/pratica': typeof PraticaRoute
+  '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
-  '/teorica': typeof TeoricaRoute
+  '/teorica': typeof TeoricaRouteWithChildren
   '/vr': typeof VrRoute
+  '/pratica/$slug': typeof PraticaSlugRoute
+  '/teorica/$slug': typeof TeoricaSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
+  fullPaths:
+    | '/'
+    | '/pratica'
+    | '/quiz'
+    | '/sobre'
+    | '/teorica'
+    | '/vr'
+    | '/pratica/$slug'
+    | '/teorica/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
-  id: '__root__' | '/' | '/pratica' | '/quiz' | '/sobre' | '/teorica' | '/vr'
+  to:
+    | '/'
+    | '/pratica'
+    | '/quiz'
+    | '/sobre'
+    | '/teorica'
+    | '/vr'
+    | '/pratica/$slug'
+    | '/teorica/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/pratica'
+    | '/quiz'
+    | '/sobre'
+    | '/teorica'
+    | '/vr'
+    | '/pratica/$slug'
+    | '/teorica/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PraticaRoute: typeof PraticaRoute
+  PraticaRoute: typeof PraticaRouteWithChildren
   QuizRoute: typeof QuizRoute
   SobreRoute: typeof SobreRoute
-  TeoricaRoute: typeof TeoricaRoute
+  TeoricaRoute: typeof TeoricaRouteWithChildren
   VrRoute: typeof VrRoute
 }
 
@@ -133,15 +176,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teorica/$slug': {
+      id: '/teorica/$slug'
+      path: '/$slug'
+      fullPath: '/teorica/$slug'
+      preLoaderRoute: typeof TeoricaSlugRouteImport
+      parentRoute: typeof TeoricaRoute
+    }
+    '/pratica/$slug': {
+      id: '/pratica/$slug'
+      path: '/$slug'
+      fullPath: '/pratica/$slug'
+      preLoaderRoute: typeof PraticaSlugRouteImport
+      parentRoute: typeof PraticaRoute
+    }
   }
 }
 
+interface PraticaRouteChildren {
+  PraticaSlugRoute: typeof PraticaSlugRoute
+}
+
+const PraticaRouteChildren: PraticaRouteChildren = {
+  PraticaSlugRoute: PraticaSlugRoute,
+}
+
+const PraticaRouteWithChildren =
+  PraticaRoute._addFileChildren(PraticaRouteChildren)
+
+interface TeoricaRouteChildren {
+  TeoricaSlugRoute: typeof TeoricaSlugRoute
+}
+
+const TeoricaRouteChildren: TeoricaRouteChildren = {
+  TeoricaSlugRoute: TeoricaSlugRoute,
+}
+
+const TeoricaRouteWithChildren =
+  TeoricaRoute._addFileChildren(TeoricaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PraticaRoute: PraticaRoute,
+  PraticaRoute: PraticaRouteWithChildren,
   QuizRoute: QuizRoute,
   SobreRoute: SobreRoute,
-  TeoricaRoute: TeoricaRoute,
+  TeoricaRoute: TeoricaRouteWithChildren,
   VrRoute: VrRoute,
 }
 export const routeTree = rootRouteImport
