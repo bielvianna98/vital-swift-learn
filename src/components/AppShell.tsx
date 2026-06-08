@@ -1,5 +1,5 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft, Menu, Stethoscope, X } from "lucide-react";
+import { ArrowLeft, Menu, Stethoscope, User, X } from "lucide-react";
 import { useState, type ReactNode } from "react";
 
 interface AppShellProps {
