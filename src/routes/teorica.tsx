@@ -1,24 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { AppShell } from "@/components/AppShell";
-import { ProcedimentosList } from "@/components/ProcedimentosList";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/teorica")({
-  head: () => ({
-    meta: [
-      { title: "Procedimentos Teóricos — MedStep" },
-      {
-        name: "description",
-        content: "Selecione um procedimento para acessar a aula teórica.",
-      },
-    ],
-  }),
-  component: TeoricaIndex,
+  component: () => <Outlet />,
 });
-
-function TeoricaIndex() {
-  return (
-    <AppShell title="Procedimentos Teóricos" showBack>
-      <ProcedimentosList tipo="teorica" />
-    </AppShell>
-  );
-}
