@@ -15,6 +15,8 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as PraticaRouteImport } from './routes/pratica'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TeoricaIndexRouteImport } from './routes/teorica.index'
+import { Route as PraticaIndexRouteImport } from './routes/pratica.index'
 import { Route as TeoricaSlugRouteImport } from './routes/teorica.$slug'
 import { Route as PraticaSlugRouteImport } from './routes/pratica.$slug'
 
@@ -48,6 +50,16 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TeoricaIndexRoute = TeoricaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TeoricaRoute,
+} as any)
+const PraticaIndexRoute = PraticaIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PraticaRoute,
+} as any)
 const TeoricaSlugRoute = TeoricaSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -68,16 +80,18 @@ export interface FileRoutesByFullPath {
   '/vr': typeof VrRoute
   '/pratica/$slug': typeof PraticaSlugRoute
   '/teorica/$slug': typeof TeoricaSlugRoute
+  '/pratica/': typeof PraticaIndexRoute
+  '/teorica/': typeof TeoricaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
-  '/teorica': typeof TeoricaRouteWithChildren
   '/vr': typeof VrRoute
   '/pratica/$slug': typeof PraticaSlugRoute
   '/teorica/$slug': typeof TeoricaSlugRoute
+  '/pratica': typeof PraticaIndexRoute
+  '/teorica': typeof TeoricaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +103,8 @@ export interface FileRoutesById {
   '/vr': typeof VrRoute
   '/pratica/$slug': typeof PraticaSlugRoute
   '/teorica/$slug': typeof TeoricaSlugRoute
+  '/pratica/': typeof PraticaIndexRoute
+  '/teorica/': typeof TeoricaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,16 +117,18 @@ export interface FileRouteTypes {
     | '/vr'
     | '/pratica/$slug'
     | '/teorica/$slug'
+    | '/pratica/'
+    | '/teorica/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/pratica'
     | '/quiz'
     | '/sobre'
-    | '/teorica'
     | '/vr'
     | '/pratica/$slug'
     | '/teorica/$slug'
+    | '/pratica'
+    | '/teorica'
   id:
     | '__root__'
     | '/'
@@ -121,6 +139,8 @@ export interface FileRouteTypes {
     | '/vr'
     | '/pratica/$slug'
     | '/teorica/$slug'
+    | '/pratica/'
+    | '/teorica/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -176,6 +196,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/teorica/': {
+      id: '/teorica/'
+      path: '/'
+      fullPath: '/teorica/'
+      preLoaderRoute: typeof TeoricaIndexRouteImport
+      parentRoute: typeof TeoricaRoute
+    }
+    '/pratica/': {
+      id: '/pratica/'
+      path: '/'
+      fullPath: '/pratica/'
+      preLoaderRoute: typeof PraticaIndexRouteImport
+      parentRoute: typeof PraticaRoute
+    }
     '/teorica/$slug': {
       id: '/teorica/$slug'
       path: '/$slug'
@@ -195,10 +229,12 @@ declare module '@tanstack/react-router' {
 
 interface PraticaRouteChildren {
   PraticaSlugRoute: typeof PraticaSlugRoute
+  PraticaIndexRoute: typeof PraticaIndexRoute
 }
 
 const PraticaRouteChildren: PraticaRouteChildren = {
   PraticaSlugRoute: PraticaSlugRoute,
+  PraticaIndexRoute: PraticaIndexRoute,
 }
 
 const PraticaRouteWithChildren =
@@ -206,10 +242,12 @@ const PraticaRouteWithChildren =
 
 interface TeoricaRouteChildren {
   TeoricaSlugRoute: typeof TeoricaSlugRoute
+  TeoricaIndexRoute: typeof TeoricaIndexRoute
 }
 
 const TeoricaRouteChildren: TeoricaRouteChildren = {
   TeoricaSlugRoute: TeoricaSlugRoute,
+  TeoricaIndexRoute: TeoricaIndexRoute,
 }
 
 const TeoricaRouteWithChildren =
