@@ -14,6 +14,7 @@ import { Route as TeoricaRouteImport } from './routes/teorica'
 import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as QuizRouteImport } from './routes/quiz'
 import { Route as PraticaRouteImport } from './routes/pratica'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TeoricaIndexRouteImport } from './routes/teorica.index'
 import { Route as PraticaIndexRouteImport } from './routes/pratica.index'
@@ -45,6 +46,11 @@ const PraticaRoute = PraticaRouteImport.update({
   path: '/pratica',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -73,6 +79,7 @@ const PraticaSlugRoute = PraticaSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
@@ -85,6 +92,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
   '/vr': typeof VrRoute
@@ -96,6 +104,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
   '/pratica': typeof PraticaRouteWithChildren
   '/quiz': typeof QuizRoute
   '/sobre': typeof SobreRoute
@@ -110,6 +119,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/login'
     | '/pratica'
     | '/quiz'
     | '/sobre'
@@ -122,6 +132,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/login'
     | '/quiz'
     | '/sobre'
     | '/vr'
@@ -132,6 +143,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/login'
     | '/pratica'
     | '/quiz'
     | '/sobre'
@@ -145,6 +157,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  LoginRoute: typeof LoginRoute
   PraticaRoute: typeof PraticaRouteWithChildren
   QuizRoute: typeof QuizRoute
   SobreRoute: typeof SobreRoute
@@ -187,6 +200,13 @@ declare module '@tanstack/react-router' {
       path: '/pratica'
       fullPath: '/pratica'
       preLoaderRoute: typeof PraticaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -255,6 +275,7 @@ const TeoricaRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  LoginRoute: LoginRoute,
   PraticaRoute: PraticaRouteWithChildren,
   QuizRoute: QuizRoute,
   SobreRoute: SobreRoute,
@@ -264,3 +285,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
