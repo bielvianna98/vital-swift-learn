@@ -1,13 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { useState } from "react";
-import { Check, X, Trophy, RotateCcw } from "lucide-react";
+import { Check, X, Trophy, RotateCcw, ChevronRight, Construction } from "lucide-react";
+import { procedimentos } from "@/lib/procedimentos";
 
 export const Route = createFileRoute("/quiz")({
   head: () => ({
     meta: [
       { title: "Quiz — MedStep" },
-      { name: "description", content: "Teste seus conhecimentos sobre desengasgo em bebê." },
+      { name: "description", content: "Teste seus conhecimentos sobre procedimentos médicos." },
     ],
   }),
   component: Quiz,
@@ -57,6 +58,7 @@ const questions = [
 ];
 
 function Quiz() {
+  const [slugSelecionado, setSlugSelecionado] = useState<string | null>(null);
   const [idx, setIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
   const [score, setScore] = useState(0);
@@ -81,12 +83,69 @@ function Quiz() {
   };
 
   const reset = () => {
+    setSlugSelecionado(null);
     setIdx(0);
     setSelected(null);
     setScore(0);
     setDone(false);
   };
 
+  // Tela de seleção de procedimento
+  if (!slugSelecionado) {
+    return (
+      <AppShell title="Quiz" showBack>
+        <div className="mb-6">
+          <p className="text-xs font-semibold uppercase tracking-wider text-medical">Quiz</p>
+          <h2 className="text-2xl font-bold text-primary mt-1 leading-tight">
+            Selecione um procedimento
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            Escolha o procedimento que deseja testar seus conhecimentos.
+          </p>
+        </div>
+
+        <div className="flex flex-col gap-3">
+          {procedimentos.map(({ slug, nome, descricao, icon: Icon, disponivel }) => (
+            <button
+              key={slug}
+              onClick={() => disponivel && setSlugSelecionado(slug)}
+              className={`group bg-card rounded-2xl shadow-card border border-border/60 p-4 flex items-center gap-4 text-left transition-all
+                ${disponivel
+                  ? "active:scale-[0.98] hover:border-medical/40 hover:shadow-glow cursor-pointer"
+                  : "opacity-60 cursor-not-allowed"
+                }`}
+            >
+              <div className="w-12 h-12 rounded-full bg-medical-soft flex items-center justify-center shrink-0">
+                <Icon className="w-6 h-6 text-medical" strokeWidth={2.2} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <h3 className="font-bold text-primary leading-tight truncate">{nome}</h3>
+                  {disponivel ? (
+                    <span className="text-[10px] font-semibold uppercase tracking-wide bg-medical-soft text-medical px-1.5 py-0.5 rounded">
+                      Disponível
+                    </span>
+                  ) : (
+                    <span className="text-[10px] font-semibold uppercase tracking-wide bg-muted text-muted-foreground px-1.5 py-0.5 rounded flex items-center gap-1">
+                      <Construction className="w-3 h-3" /> Em breve
+                    </span>
+                  )}
+                </div>
+                <p className="text-xs text-muted-foreground leading-snug mt-0.5 line-clamp-2">
+                  {descricao}
+                </p>
+              </div>
+              {disponivel && (
+                <ChevronRight className="w-5 h-5 text-primary/70 group-hover:translate-x-1 transition-transform shrink-0" />
+              )}
+            </button>
+          ))}
+        </div>
+      </AppShell>
+    );
+  }
+
+  // Tela de resultado
   if (done) {
     const pct = Math.round((score / questions.length) * 100);
     return (
@@ -107,11 +166,11 @@ function Quiz() {
               onClick={reset}
               className="w-full bg-medical-gradient text-white font-semibold py-3 rounded-2xl shadow-card flex items-center justify-center gap-2 active:scale-[0.98] transition-transform"
             >
-              <RotateCcw className="w-4 h-4" /> Refazer o quiz
+              <RotateCcw className="w-4 h-4" /> Escolher outro procedimento
             </button>
             <Link
               to="/"
-              className="w-full border border-border text-primary font-semibold py-3 rounded-2xl hover:bg-muted transition-colors"
+              className="w-full border border-border text-primary font-semibold py-3 rounded-2xl hover:bg-muted transition-colors text-center"
             >
               Voltar ao início
             </Link>
@@ -121,6 +180,7 @@ function Quiz() {
     );
   }
 
+  // Tela das perguntas
   return (
     <AppShell title="Quiz" showBack>
       <div className="mb-6">
