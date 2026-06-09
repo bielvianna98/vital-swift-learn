@@ -76,10 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "description", content: "App educacional de revisão rápida de procedimentos médicos." },
       { name: "author", content: "MedStep" },
       { property: "og:title", content: "MedStep — Medicina em segundos" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:description", content: "App educacional de revisão rápida de procedimentos médicos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "MedStep — Medicina em segundos" },
+      { name: "twitter:description", content: "App educacional de revisão rápida de procedimentos médicos." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/486149c7-ef50-42a3-aee6-cd532a26b6b6/id-preview-16c538d3--819aa1b8-9ed5-4f60-b213-3024a8cda06b.lovable.app-1780965895619.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/486149c7-ef50-42a3-aee6-cd532a26b6b6/id-preview-16c538d3--819aa1b8-9ed5-4f60-b213-3024a8cda06b.lovable.app-1780965895619.png" },
     ],
     links: [
       {
