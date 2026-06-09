@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, ClipboardCheck, Glasses, HeartPulse, ChevronRight, BarChart3 } from "lucide-react";
+import { BookOpen, ClipboardCheck, Glasses, HeartPulse, ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 
 export const Route = createFileRoute("/")({
@@ -64,18 +64,7 @@ function Home() {
         ))}
       </div>
 
-      <div className="mt-8 flex items-end justify-end">
-        <div className="flex items-end gap-1 h-12 text-medical">
-          {[30, 50, 70, 100].map((h, i) => (
-            <div
-              key={i}
-              className="w-2 rounded-sm bg-medical"
-              style={{ height: `${h}%`, opacity: 0.4 + i * 0.2 }}
-            />
-          ))}
-          <BarChart3 className="sr-only" />
-        </div>
-      </div>
+      
 
       <Link
         to="/sobre"
