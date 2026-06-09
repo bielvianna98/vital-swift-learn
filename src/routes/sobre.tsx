@@ -48,7 +48,7 @@ function Sobre() {
       </div>
 
       <p className="text-xs text-center text-muted-foreground mt-8">
-        Projeto acadêmico · Disciplina de Tecnologia e Inovação em Medicina
+        © 2025 MedStep. Todos os direitos reservados.
       </p>
     </AppShell>
   );
